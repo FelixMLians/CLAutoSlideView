@@ -39,12 +39,15 @@ NSMutableArray *viewsArray = [@[] mutableCopy];
     CGRect frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame));
     self.autoSlideView = [CLAutoSlideView autoSlideViewWithFrame:frame
                                                         delegate:self
-                                                          images:viewsArray
+                                                          images:nil
                                                            count:3
                                                animationInterval:3.0
                                    currentPageIndicatorTintColor:[UIColor orangeColor]
                                           pageIndicatorTintColor:[UIColor lightGrayColor]];
     [self.view addSubview:self.autoSlideView];
+    
+    // you can init with images, or add later with network images
+    [self.autoSlideView setImages:viewsArray];
 ````
 
 * Delegate (`@optional`):
