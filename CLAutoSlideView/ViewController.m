@@ -44,13 +44,14 @@
     CGRect frame = CGRectMake(0, 40, CGRectGetWidth(self.view.frame), 200);
     CLAutoSlideView *autoSlideView = [CLAutoSlideView autoSlideViewWithFrame:frame
                                                         delegate:self
-                                                          images:viewsArray
-                                                           count:3
+                                                          images:nil
                                                animationInterval:3.0
                                    currentPageIndicatorTintColor:[UIColor orangeColor]
                                           pageIndicatorTintColor:[UIColor lightGrayColor]];
     autoSlideView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     [self.view addSubview:autoSlideView];
+    
+    [autoSlideView setImageViews:viewsArray];
 }
 
 // webview
@@ -76,7 +77,6 @@
     CLAutoSlideView *autoSlideView = [CLAutoSlideView autoSlideViewWithFrame:frame
                                                                     delegate:self
                                                                       images:viewsArray
-                                                                       count:3
                                                            animationInterval:3.0
                                                currentPageIndicatorTintColor:[UIColor orangeColor]
                                                       pageIndicatorTintColor:[UIColor lightGrayColor]];

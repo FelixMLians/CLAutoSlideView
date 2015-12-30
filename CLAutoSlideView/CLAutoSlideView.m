@@ -12,15 +12,12 @@ static NSInteger const kDefaultPageCount = 1;
 static CGFloat const kDefaultAnimationInterval = 3.0F;
 
 @interface CLAutoSlideView () <UIScrollViewDelegate>
-
 {
     CGFloat scrollViewStartContentOffsetX;
 }
 @property (nonatomic , assign) NSInteger currentPageIndex;
 
 @property (nonatomic , strong) NSMutableArray *contentViews;
-
-@property (nonatomic, copy) NSArray *imageViews;
 
 @property (nonatomic , strong) NSTimer *animationTimer;
 
@@ -35,14 +32,12 @@ static CGFloat const kDefaultAnimationInterval = 3.0F;
 + (instancetype)autoSlideViewWithFrame:(CGRect)frame
                               delegate:(id<CLAutoSlideViewDelegate>)delegate
                                 images:(NSArray *)images
-                                 count:(NSInteger)count
                      animationInterval:(NSInteger)animationInterval
          currentPageIndicatorTintColor:(UIColor *)currentPageIndicatorTintColor
                 pageIndicatorTintColor:(UIColor *)pageIndicatorTintColor {
     return [[self alloc] initWithFrame:frame
                               delegate:delegate
                                 images:images
-                                 count:count
                      animationInterval:animationInterval
          currentPageIndicatorTintColor:currentPageIndicatorTintColor
                 pageIndicatorTintColor:pageIndicatorTintColor];
@@ -51,7 +46,6 @@ static CGFloat const kDefaultAnimationInterval = 3.0F;
 - (instancetype)initWithFrame:(CGRect)frame
                      delegate:(id<CLAutoSlideViewDelegate>)delegate
                        images:(NSArray *)images
-                        count:(NSInteger)count
             animationInterval:(NSInteger)animationInterval
 currentPageIndicatorTintColor:(UIColor *)currentPageIndicatorTintColor
        pageIndicatorTintColor:(UIColor *)pageIndicatorTintColor {
@@ -61,15 +55,19 @@ currentPageIndicatorTintColor:(UIColor *)currentPageIndicatorTintColor
         [self configureUI];
         
         self.delegate = delegate;
-        self.imageViews = images;
-        self.contentViews = [[NSMutableArray alloc] initWithArray:images];
-        self.totalPagesCount = count;
         self.animationInterval = animationInterval;
         self.pageControl.currentPageIndicatorTintColor = currentPageIndicatorTintColor;
         self.pageControl.pageIndicatorTintColor = pageIndicatorTintColor;
         
-        [self configureContentViews];
-        [self.animationTimer resumeTimer];
+        if (images != nil && images.count > 0) {
+            _imageViews = images;
+            self.totalPagesCount = self.imageViews.count;
+            self.contentViews = [[NSMutableArray alloc] initWithArray:images];
+            [self configureContentViews];
+            [self.animationTimer resumeTimer];
+        } else {
+            _totalPagesCount = 1;
+        }
     }
     return self;
 }
@@ -281,6 +279,13 @@ currentPageIndicatorTintColor:(UIColor *)currentPageIndicatorTintColor
     [self.pageControl setCurrentPage:_currentPageIndex];
 }
 
+- (void)setImageViews:(NSArray *)imageViews {
+    _imageViews = imageViews;
+    self.totalPagesCount = imageViews.count;
+    self.contentViews = [[NSMutableArray alloc] initWithArray:imageViews];
+    [self configureContentViews];
+    [self.animationTimer resumeTimer];
+}
 
 @end
 

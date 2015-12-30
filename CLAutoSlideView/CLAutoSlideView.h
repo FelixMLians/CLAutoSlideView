@@ -22,9 +22,8 @@
 @interface CLAutoSlideView : UIView
 
 @property (nonatomic, strong) UIScrollView *scrollView;   // main scrollView
-
+@property (nonatomic, copy) NSArray *imageViews;
 @property (nonatomic, assign) NSInteger totalPagesCount;  // total pages count, default 1
-
 @property (nonatomic, assign) CGFloat animationInterval;  // interval of slide pages，optional，default is 0.7s
 
 @property (nonatomic, weak) id<CLAutoSlideViewDelegate> delegate;
@@ -34,7 +33,6 @@
 + (instancetype)autoSlideViewWithFrame:(CGRect)frame
                               delegate:(id<CLAutoSlideViewDelegate>)delegate
                                 images:(NSArray *)images
-                                 count:(NSInteger)count
                      animationInterval:(NSInteger)animationInterval
          currentPageIndicatorTintColor:(UIColor *)currentPageIndicatorTintColor
                 pageIndicatorTintColor:(UIColor *)pageIndicatorTintColor;
@@ -44,7 +42,6 @@
 - (instancetype)initWithFrame:(CGRect)frame
                               delegate:(id<CLAutoSlideViewDelegate>)delegate
                                 images:(NSArray *)images
-                                 count:(NSInteger)count
                      animationInterval:(NSInteger)animationInterval
          currentPageIndicatorTintColor:(UIColor *)currentPageIndicatorTintColor
                 pageIndicatorTintColor:(UIColor *)pageIndicatorTintColor;
