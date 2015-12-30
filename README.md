@@ -1,7 +1,7 @@
 # CLAutoSlideView
 🔥 A customized auto slide view! And, infinite loop!
 
-![CLAutoSlideView](https://github.com/FelixMLians/CLAutoSlideView/blob/master/clautolayout.gif)
+![CLAutoSlideView](https://github.com/FelixMLians/CLAutoSlideView/blob/master/snapshot/clautolayout2.gif)
 ````
 
 ## Introduction
